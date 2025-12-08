@@ -1,25 +1,26 @@
-import { Button, Container, Grid } from '@mui/material';
+import {Container, Grid } from '@mui/material';
+
+import { getCategories } from '@/lib/api/categories';
+
 import styles from './page.module.css'
-import { CategoryDTO } from '@/dtos/Category';
+import CategoryBlock from './components/CategoryBlock/CategoryBlock';
 
 const MarketplacePage = async () => {
-    const resp = await fetch(`${process.env.PUBCLIC_BASE_URL}/api/categories`, {
-        next: {
-            revalidate: 60
-        }
-    });
+    
+    const categories = await getCategories();
 
-    const categories = await resp.json();
+    console.log(categories)
 
     return(
         <div className={styles.marketplace_page}>
             <Container>
                 <Grid container spacing={2}>
                     {
-                        categories.map((category: CategoryDTO) => {
+                        categories.map((category) => {
+                            const {name, subcategories, slug, _id} = category
                             return(
-                                <Grid size={4}>
-                                    {category.name}
+                                <Grid key={_id} size={4}>
+                                    <CategoryBlock name={name} slug={slug} subcategories={subcategories} />
                                 </Grid>
                             )
                         })

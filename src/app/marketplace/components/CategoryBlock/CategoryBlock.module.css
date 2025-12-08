@@ -1,0 +1,21 @@
+.category {
+    max-width: 170px;
+}
+
+.category__link {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.category__subcategories {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category_subcategory_link:not(:last-child) {
+    margin-right: 8px;
+}
+
+.category_subcategory_link {
+    margin-bottom: 6px;
+}

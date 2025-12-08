@@ -1,12 +1,28 @@
 import { CategoryDTO } from "@/dtos/Category";
 import { connectDB } from "@/lib/mongodb";
 import Category from "@/models/Category";
+import Subcategory from "@/models/Subcategory";
 import { NextResponse } from "next/server";
 
 export async function GET() {
-    await connectDB();
-    const categories = await Category.find({});
-    return NextResponse.json(categories)
+  await connectDB();
+
+  const categories = await Category.find({}).lean();
+
+  const results = await Promise.all(
+    categories.map(async (category) => {
+      const subcategories = await Subcategory.find({
+        category: category._id,
+      }).lean();
+
+      return {
+        ...category,
+        subcategories,
+      };
+    })
+  );
+
+  return NextResponse.json(results);
 }
 
 export async function POST(req: Request): Promise<NextResponse> {
