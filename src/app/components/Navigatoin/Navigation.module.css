@@ -1,0 +1,7 @@
+.navigation {
+
+}
+
+.navigation__link:not(:first-child) {
+    margin-left: 8px;
+}

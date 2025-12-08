@@ -1,0 +1,12 @@
+.signup_form {
+    width: 100%;
+    max-width: 360px;
+}
+
+.signup_form__fields_group {
+    margin-bottom: 24px;
+}
+
+.signup_form__title {
+    margin-bottom: 14px;
+}

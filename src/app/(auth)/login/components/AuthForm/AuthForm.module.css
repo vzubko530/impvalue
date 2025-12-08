@@ -1,0 +1,12 @@
+.auth_form {
+    width: 100%;
+    max-width: 360px;
+}
+
+.auth_form__fields_group {
+    margin-bottom: 24px;
+}
+
+.auth_form__title {
+    margin-bottom: 14px;
+}
