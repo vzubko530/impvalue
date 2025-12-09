@@ -1,3 +1,4 @@
+import EmotionRegistry from "./components/EmotionRegistry/EmotionRegistry";
 import Header from "./components/Header/Header";
 import "./globals.css";
 
@@ -10,8 +11,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
+        <EmotionRegistry>
+          <Header />
+          {children}
+        </EmotionRegistry>
       </body>
     </html>
   );

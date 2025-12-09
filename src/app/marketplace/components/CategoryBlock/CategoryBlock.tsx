@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import styles from './CategoryBlock.module.css'
+import { SubcategoryDTO } from "@/dtos/Subcategory";
 
 interface CategoryBlockProps {
     name: string;
@@ -11,12 +12,12 @@ interface CategoryBlockProps {
 const CategoryBlock = ({name, slug, subcategories}: CategoryBlockProps) => {
     return(
         <div className={styles.category}>
-            <Link className={styles.category__link} href={slug}>{name}</Link>
+            <Link className={styles.category__link} href={`products/${slug}`}>{name}</Link>
             <div className={styles.category__subcategories}>
                 {subcategories.map((subcategory) => {
-                    const {name, slug, _id} = subcategory;
+                    const {name, slug: subslug, _id} = subcategory;
                     return(
-                        <Link key={_id} className={styles.category_subcategory_link} href={slug}>{name}</Link>
+                        <Link key={_id} className={styles.category_subcategory_link} href={`products/${slug}/${subslug}`}>{name}</Link>
                     )
                 } )}
             </div>
