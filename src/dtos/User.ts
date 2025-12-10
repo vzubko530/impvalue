@@ -1,6 +1,8 @@
 import { BaseDTO } from './Base';
 
-export interface UserDTO extends BaseDTO {}
+export interface UserDTO extends BaseDTO {
+  email: string;
+}
 
 export interface CreateUserDTO {
   email: string;

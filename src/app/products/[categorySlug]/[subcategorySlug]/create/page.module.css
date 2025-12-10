@@ -1,0 +1,10 @@
+.create_product_page {
+  padding-top: 60px;
+}
+
+.create_product_page__wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

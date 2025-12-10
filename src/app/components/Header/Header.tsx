@@ -1,5 +1,6 @@
 import { Container } from '@mui/material';
 import Navigation from '../Navigatoin/Navigation';
+
 import styles from './Header.module.css';
 
 const Header = () => {
@@ -7,9 +8,7 @@ const Header = () => {
     <Container>
       <header className={styles.header}>
         <div className={styles.header__logo}>Logo</div>
-        <div className={styles.header__navigation}>
-          <Navigation />
-        </div>
+        <Navigation />
       </header>
     </Container>
   );

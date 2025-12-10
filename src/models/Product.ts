@@ -1,6 +1,16 @@
-import mongoose, { models, Schema } from 'mongoose';
+import mongoose, { models, Schema, Types } from 'mongoose';
 
-const ProductSchema = new Schema({
+interface ProductModel {
+  _id: Types.ObjectId;
+  title: string;
+  description: string;
+  price: number;
+  category: Types.ObjectId;
+  subcategory: Types.ObjectId;
+  seller: Types.ObjectId;
+}
+
+const ProductSchema = new Schema<ProductModel>({
   title: {
     type: String,
     required: true,
@@ -9,7 +19,7 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
   },
-  print: {
+  price: {
     type: Number,
     required: true,
   },
@@ -30,4 +40,5 @@ const ProductSchema = new Schema({
   },
 });
 
-export default models.Product || mongoose.model('Product', ProductSchema);
+export default models.Product ||
+  mongoose.model<ProductModel>('Product', ProductSchema);

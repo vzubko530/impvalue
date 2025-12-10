@@ -1,6 +1,8 @@
 import { Container } from '@mui/material';
 import styles from './page.module.css';
 import { getCategories } from '@/lib/api/categories';
+import CreateProductButton from './components/CreateProductButton/CreateProductButton';
+import Link from 'next/link';
 
 export async function generateStaticParams() {
   const categories = await getCategories();
@@ -26,12 +28,12 @@ const ProductsPage = async ({
 }) => {
   const { categorySlug, subcategorySlug } = await params;
 
-  // const products =
-
   return (
     <div className={styles.products_page}>
       <Container>
-        {categorySlug} {subcategorySlug}
+        <Link href={`/products/${categorySlug}/${subcategorySlug}/create`}>
+          Sell
+        </Link>
       </Container>
     </div>
   );

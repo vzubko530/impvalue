@@ -2,7 +2,7 @@ import NextTopLoader from 'nextjs-toploader';
 import EmotionRegistry from './components/EmotionRegistry/EmotionRegistry';
 import Header from './components/Header/Header';
 import './globals.css';
-import { cookies } from 'next/headers';
+import UserProvider from './components/UserProvider/UserProvider';
 
 export default function RootLayout({
   children,
@@ -13,9 +13,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <EmotionRegistry>
-          <NextTopLoader showSpinner={false} />
-          <Header />
-          {children}
+          <UserProvider>
+            <NextTopLoader showSpinner={false} />
+            <Header />
+            {children}
+          </UserProvider>
         </EmotionRegistry>
       </body>
     </html>
