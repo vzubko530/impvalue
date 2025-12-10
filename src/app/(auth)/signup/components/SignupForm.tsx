@@ -11,9 +11,12 @@ import { Button, Stack, TextField, Typography } from '@mui/material';
 import styles from './SignupForm.module.css';
 import { createAccount } from '@/lib/api/auth';
 import { CreateUserDTO } from '@/dtos/User';
+import { useRouter } from 'next/navigation';
 
 const SignupForm = () => {
   const [serverError, setServerError] = useState('');
+
+  const router = useRouter();
 
   const {
     register,
@@ -24,7 +27,11 @@ const SignupForm = () => {
   });
 
   const handleSignup = async (data: CreateUserDTO) => {
-    const user = await createAccount(data);
+    const result = await createAccount(data);
+
+    if (result.success) {
+      router.push('/login');
+    }
   };
 
   return (
@@ -80,7 +87,12 @@ const SignupForm = () => {
         </Stack>
       </div>
       <Stack spacing={2}>
-        <Button fullWidth variant="contained" type="submit">
+        <Button
+          loading={isSubmitting}
+          fullWidth
+          variant="contained"
+          type="submit"
+        >
           SignUp
         </Button>
       </Stack>

@@ -1,17 +1,27 @@
-import { CategoryDTO } from '@/dtos/Category';
+import { CategoryDTO, CategoryWithSubsDTO } from '@/dtos/Category';
+import { cache } from 'react';
+import { connectDB } from '../mongodb';
+import Category from '@/models/Category';
+import Subcategory from '@/models/Subcategory';
+import { SubcategoryDTO } from '@/dtos/Subcategory';
 
-export async function getCategories(): Promise<CategoryDTO[]> {
-  const resp = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`,
-    {
-      next: { revalidate: 60 },
-    },
+export const getCategories = async (): Promise<CategoryWithSubsDTO[]> => {
+  await connectDB();
+
+  const categories = await Category.find({}).lean<CategoryDTO[]>();
+
+  const results = await Promise.all(
+    categories.map(async (category) => {
+      const subcategories = await Subcategory.find({
+        category: category._id,
+      }).lean<SubcategoryDTO[]>();
+
+      return {
+        ...category,
+        subcategories,
+      };
+    }),
   );
 
-  if (!resp.ok) {
-    throw new Error('Failed to fetch categories');
-  }
-
-  const data = (await resp.json()) as CategoryDTO[];
-  return data;
-}
+  return results;
+};

@@ -1,11 +1,14 @@
-import { BaseDTO } from "./Base";
+import { BaseDTO } from './Base';
 
-export interface UserDTO extends BaseDTO {
-    
-}
+export interface UserDTO extends BaseDTO {}
 
 export interface CreateUserDTO {
-    email: string;
-    password: string;
-    username: string;
+  email: string;
+  password: string;
+  username: string;
+}
+
+export interface LoginUserDTO {
+  email: string;
+  password: string;
 }

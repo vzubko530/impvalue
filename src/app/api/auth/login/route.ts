@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
-import jwt from 'jsonwebtoken'
+import { NextResponse } from 'next/server';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-import { connectDB } from "@/lib/mongodb";
-import User from "@/models/User";
+import { connectDB } from '@/lib/mongodb';
+import User from '@/models/User';
 
 export async function POST(req: Request) {
   await connectDB();
@@ -12,52 +12,46 @@ export async function POST(req: Request) {
 
   if (!email || !password) {
     return NextResponse.json(
-      { error: "Email and password are required" },
-      { status: 400 }
+      { error: 'Email and password are required' },
+      { status: 400 },
     );
   }
 
   const user = await User.findOne({ email });
   if (!user) {
-    return NextResponse.json(
-      { error: "Invalid credentials" },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
   }
 
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
-    return NextResponse.json(
-      { error: "Invalid credentials" },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
   }
 
   const token = jwt.sign(
     {
-      id: user._id,
-      email: user.email
+      _id: user._id,
+      email: user.email,
     },
     process.env.JWT_SECRET!,
-    { expiresIn: "7d" }
+    { expiresIn: '7d' },
   );
 
   const response = NextResponse.json(
     {
       _id: user._id,
       email: user.email,
-      username: user.username
+      username: user.username,
     },
-    { status: 200 }
+    { status: 200 },
   );
 
   response.cookies.set({
-    name: "auth_token",
+    name: 'auth_token',
     value: token,
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === 'production',
     maxAge: 60 * 60 * 24 * 7,
-    path: "/"
+    path: '/',
   });
 
   return response;

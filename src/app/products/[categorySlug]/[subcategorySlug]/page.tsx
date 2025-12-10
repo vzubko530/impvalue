@@ -1,21 +1,40 @@
 import { Container } from '@mui/material';
-import styles from './page.module.css'
+import styles from './page.module.css';
+import { getCategories } from '@/lib/api/categories';
 
-const ProductsPage = async ({params}: {params: Promise<{categorySlug: string, subcategorySlug: string}>}) => { 
+export async function generateStaticParams() {
+  const categories = await getCategories();
 
-    const {categorySlug, subcategorySlug} = await params;
+  const params = [];
 
-    // const products = 
+  for (const category of categories) {
+    for (const subcategory of category.subcategories) {
+      params.push({
+        category: category.slug,
+        subcategory: subcategory.slug,
+      });
+    }
+  }
 
-
-
-    return(
-        <div className={styles.products_page}>
-            <Container>
-                {categorySlug} {subcategorySlug}
-            </Container>
-        </div>
-    )
+  return params;
 }
+
+const ProductsPage = async ({
+  params,
+}: {
+  params: Promise<{ categorySlug: string; subcategorySlug: string }>;
+}) => {
+  const { categorySlug, subcategorySlug } = await params;
+
+  // const products =
+
+  return (
+    <div className={styles.products_page}>
+      <Container>
+        {categorySlug} {subcategorySlug}
+      </Container>
+    </div>
+  );
+};
 
 export default ProductsPage;
