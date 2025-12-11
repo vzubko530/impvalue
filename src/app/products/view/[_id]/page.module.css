@@ -1,0 +1,20 @@
+.product_page {
+}
+
+.product_page__container {
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.product_page__description {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.product_page__price {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: right;
+}

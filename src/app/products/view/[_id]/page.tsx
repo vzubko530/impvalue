@@ -2,6 +2,8 @@ import { getProductById } from '@/lib/api/products';
 import { Button, Container, Typography } from '@mui/material';
 import EditButton from '../components/EditButton';
 
+import styles from './page.module.css';
+
 const ProductPage = async ({
   params,
 }: {
@@ -18,13 +20,17 @@ const ProductPage = async ({
   } = product;
 
   return (
-    <Container>
-      <Typography variant="h6">{title}</Typography>
-      <span>{description}</span>
-      <span>{price}</span>
-      <Button variant="contained">Buy</Button>
-      <EditButton sellerId={sellerId.toString()} />
-    </Container>
+    <div className={styles.product_page}>
+      <div className={styles.product_page__container}>
+        <Typography variant="h6">{title}</Typography>
+        <span className={styles.product_page__description}>{description}</span>
+        <span className={styles.product_page__price}>{price}</span>
+        <Button fullWidth variant="contained">
+          Buy
+        </Button>
+        <EditButton sellerId={sellerId.toString()} />
+      </div>
+    </div>
   );
 };
 

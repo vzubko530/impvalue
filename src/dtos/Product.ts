@@ -1,4 +1,6 @@
 import { BaseDTO } from './Base';
+import { CategoryDTO } from './Category';
+import { SubcategoryDTO } from './Subcategory';
 import { UserDTO } from './User';
 
 export interface ProductDTO extends BaseDTO {
@@ -8,6 +10,16 @@ export interface ProductDTO extends BaseDTO {
   category: string;
   subcategory: string;
   seller: UserDTO;
+}
+
+export interface SellerProductDTO {
+  categories: Array<
+    CategoryDTO & {
+      subcategories: Array<SubcategoryDTO> & {
+        products: Array<Omit<ProductDTO, 'seller'>>;
+      };
+    }
+  >;
 }
 
 export interface CreateProductDTO {

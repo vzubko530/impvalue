@@ -2,7 +2,8 @@ import { connectDB } from '../mongodb';
 import '@/models/User';
 import Product from '@/models/Product';
 import Subcategory from '@/models/Subcategory';
-import { ProductDTO } from '@/dtos/Product';
+import { ProductDTO, SellerProductDTO } from '@/dtos/Product';
+import Category from '@/models/Category';
 
 export async function getProductsBySubcategorySlug(
   subcategorySlug: string,

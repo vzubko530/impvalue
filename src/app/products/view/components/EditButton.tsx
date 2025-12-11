@@ -13,7 +13,11 @@ const EditButton = ({ sellerId }: EditButtonProps) => {
 
   if (user?._id !== sellerId) return null;
 
-  return <Button variant="outlined">Edit</Button>;
+  return (
+    <Button fullWidth variant="outlined">
+      Edit
+    </Button>
+  );
 };
 
 export default EditButton;

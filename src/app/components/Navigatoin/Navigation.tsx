@@ -64,8 +64,12 @@ const Navigation = () => {
               horizontal: 'right',
             }}
           >
-            <MenuItem onClick={() => {}}>Profile</MenuItem>
-            <MenuItem onClick={() => {}}>Settings</MenuItem>
+            <MenuItem>
+              <Link href={'/profile'}>Profile</Link>
+            </MenuItem>
+            <MenuItem>
+              <Link href={'/settings'}>Settings</Link>
+            </MenuItem>
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </div>

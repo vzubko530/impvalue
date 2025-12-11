@@ -11,7 +11,7 @@ interface ProductRowProps {
 
 const ProductRow = ({ _id, title, sellerEmail, price }: ProductRowProps) => {
   return (
-    <Link href={`/products/${_id}`} className={styles.product_row}>
+    <Link href={`/products/view/${_id}`} className={styles.product_row}>
       <div>
         <span className={styles.product_row__seller}>{sellerEmail}</span>
         <span className={styles.product_row__title}>{title}</span>
