@@ -5,12 +5,14 @@ import styles from './Header.module.css';
 
 const Header = () => {
   return (
-    <Container>
-      <header className={styles.header}>
-        <div className={styles.header__logo}>Logo</div>
-        <Navigation />
-      </header>
-    </Container>
+    <header className={styles.header}>
+      <Container>
+        <div className={styles.header__wrapper}>
+          <div className={styles.header__logo}>Logo</div>
+          <Navigation />
+        </div>
+      </Container>
+    </header>
   );
 };
 

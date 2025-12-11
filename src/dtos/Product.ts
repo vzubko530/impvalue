@@ -1,4 +1,5 @@
 import { BaseDTO } from './Base';
+import { UserDTO } from './User';
 
 export interface ProductDTO extends BaseDTO {
   title: string;
@@ -6,7 +7,7 @@ export interface ProductDTO extends BaseDTO {
   price: number;
   category: string;
   subcategory: string;
-  seller: string;
+  seller: UserDTO;
 }
 
 export interface CreateProductDTO {

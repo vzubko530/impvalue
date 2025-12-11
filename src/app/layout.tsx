@@ -1,8 +1,11 @@
 import NextTopLoader from 'nextjs-toploader';
 import EmotionRegistry from './components/EmotionRegistry/EmotionRegistry';
 import Header from './components/Header/Header';
-import './globals.css';
+
 import UserProvider from './components/UserProvider/UserProvider';
+
+import './globals.css';
+import styles from './page.module.css';
 
 export default function RootLayout({
   children,
@@ -16,7 +19,7 @@ export default function RootLayout({
           <UserProvider>
             <NextTopLoader showSpinner={false} />
             <Header />
-            {children}
+            <main className={styles.main_layout}>{children}</main>
           </UserProvider>
         </EmotionRegistry>
       </body>

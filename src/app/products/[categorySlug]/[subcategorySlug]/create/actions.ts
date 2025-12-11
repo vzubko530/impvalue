@@ -36,7 +36,7 @@ export async function createProductAction(product: CreateProductDTO) {
   if (!subcategory) {
   }
 
-  await Product.create({
+  const newProduct = await Product.create({
     title,
     description,
     price,
@@ -46,6 +46,6 @@ export async function createProductAction(product: CreateProductDTO) {
   });
 
   return {
-    success: true,
+    _id: newProduct._id,
   };
 }

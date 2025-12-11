@@ -11,6 +11,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createProductAction } from '../../actions';
 import { CreateProductDTO } from '@/dtos/Product';
+import { useRouter } from 'next/navigation';
 
 interface CreateProductFormProps {
   categorySlug: string;
@@ -21,6 +22,8 @@ const CreateProductForm = ({
   categorySlug,
   subcategorySlug,
 }: CreateProductFormProps) => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -32,13 +35,17 @@ const CreateProductForm = ({
   const handleCreateProduct = async (data: CreateProductSchemaType) => {
     const { title, description, price } = data;
 
-    await createProductAction({
+    const newProduct = await createProductAction({
       title,
       description,
       price,
       categorySlug: categorySlug,
       subcategorySlug: subcategorySlug,
     });
+
+    const { _id } = newProduct;
+
+    router.push(`/products/${_id}`);
   };
 
   return (

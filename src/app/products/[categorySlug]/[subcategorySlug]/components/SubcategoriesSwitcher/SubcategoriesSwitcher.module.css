@@ -1,0 +1,7 @@
+.subcategory_switcher {
+  display: flex;
+}
+
+.subcategory_switcher__button:not(:first-child) {
+  margin-left: 8px;
+}

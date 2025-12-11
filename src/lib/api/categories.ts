@@ -25,3 +25,11 @@ export const getCategories = async (): Promise<CategoryWithSubsDTO[]> => {
 
   return results;
 };
+
+export async function getCategoryBySlug(slug: string): Promise<CategoryDTO> {
+  await connectDB();
+
+  const category = await Category.findOne({ slug }).lean();
+
+  return category;
+}
