@@ -8,7 +8,7 @@ export const CreateProductSchema = z.object({
   description: z
     .string()
     .min(30, 'Minimum 30 charachers')
-    .max(255, 'Maximum 255 charachers'),
+    .max(1000, 'Maximum 1000 charachers'),
   price: z.coerce
     .number()
     .positive()

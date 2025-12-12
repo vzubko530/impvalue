@@ -15,9 +15,11 @@ export interface ProductDTO extends BaseDTO {
 export interface SellerProductDTO {
   categories: Array<
     CategoryDTO & {
-      subcategories: Array<SubcategoryDTO> & {
-        products: Array<Omit<ProductDTO, 'seller'>>;
-      };
+      subcategories: Array<
+        SubcategoryDTO & {
+          products: Array<Omit<ProductDTO, 'seller'>>;
+        }
+      >;
     }
   >;
 }

@@ -48,7 +48,7 @@ const Navigation = () => {
               handleMenuOpen(e);
             }}
           >
-            {user?.email}
+            {user?.username}
           </div>
           <Menu
             id="basic-menu"

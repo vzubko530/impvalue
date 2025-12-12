@@ -2,6 +2,7 @@ import { BaseDTO } from './Base';
 
 export interface UserDTO extends BaseDTO {
   email: string;
+  username: string;
 }
 
 export interface CreateUserDTO {
